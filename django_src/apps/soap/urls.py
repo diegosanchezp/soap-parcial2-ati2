@@ -1,5 +1,5 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-    path("test/", views.hello_world_service),
+    path("task/", views.task_service),
 ]
