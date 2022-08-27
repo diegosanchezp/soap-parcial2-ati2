@@ -12,13 +12,16 @@ djangorestframework==3.13.1
 drf-spectacular==0.23.1
 gunicorn==20.1.0
 inflection==0.5.1; python_version >= '3.5'
-jsonschema==4.10.0; python_version >= '3.7'
+jsonschema==4.14.0; python_version >= '3.7'
+lxml==4.9.1
 psycopg2-binary==2.9.3
 pycparser==2.21
 pyrsistent==0.18.1; python_version >= '3.7'
 pytz==2022.2.1
 pyyaml==6.0; python_version >= '3.6'
-setuptools==65.0.1; python_version >= '3.7'
+setuptools==65.3.0; python_version >= '3.7'
+git+https://github.com/diegosanchezp/spyne.git@f32d56263c8a84b766f971342541c5ac5ed138a1#egg=spyne
 sqlparse==0.4.2; python_version >= '3.5'
+suds==1.1.2
 uritemplate==4.1.1; python_version >= '3.6'
 whitenoise==6.2.0

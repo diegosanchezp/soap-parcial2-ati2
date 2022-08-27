@@ -9,7 +9,7 @@ build:
   docker:
     web: ./docker/heroku/Dockerfile.web
   config:
-    REPOID: diegosanchezp/django-boilerplate-test
+    REPOID: diegosanchezp/soap-parcial1-ati2
 release:
   image: web
   command:
