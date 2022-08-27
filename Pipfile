@@ -14,6 +14,9 @@ drf-spectacular = "~=0.23.1"
 whitenoise = "*"
 django-widget-tweaks = "*"
 argon2-cffi = "*"
+spyne = {git = "https://github.com/diegosanchezp/spyne.git"}
+suds = "*"
+lxml = "~=4.9.1"
 
 [dev-packages]
 django-stubs = "*"
