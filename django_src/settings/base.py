@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # ---- Our apps ----
     "django_src.apps.api.apps.ApiConfig",
+    "django_src.apps.soap.apps.SoapConfig",
     # ---- Third party ----
     # API REST
     "rest_framework",
