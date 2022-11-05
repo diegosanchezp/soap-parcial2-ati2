@@ -23,6 +23,12 @@ Run this command, to setup the development environment
 ```bash
 bash ./shscripts/setup_dev.sh
 ```
+
+Load bash project utilities
+```bash
+source shscripts/dev.sh
+```
+
 Activate the server, to test if everything has worked
 
 ```bash

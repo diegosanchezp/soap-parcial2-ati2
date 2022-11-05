@@ -21,3 +21,6 @@ pipenv install -d && \
 python manage.py migrate && \
 # Add predefined admin superuser for development
 python manage.py loaddata ./fixtures/admin.json
+
+# Load Country Data
+python shscripts/importcountries.py
