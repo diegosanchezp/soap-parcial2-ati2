@@ -1,15 +1,15 @@
 version: "3.7"
 
 volumes:
-  dev_postgres_data: {}
-  dev_postgres_data_backups: {}
+  parcial2ati2_postgres_data: {}
+  parcial2ati2_postgres_data_backups: {}
 
 services:
   django:
     build:
       context: .
       dockerfile: ./Dockerfile
-    image: django_dev_image
+    image: django_parcial2ati2_image
     container_name: django_dev
     working_dir: /app
     depends_on:
@@ -30,10 +30,10 @@ services:
       - "8000:8000"
   postgres:
     image: postgres:14.4
-    container_name: dev_postgres
+    container_name: parcial2ati2_postgres
     volumes:
-      - dev_postgres_data:/var/lib/postgresql/data:Z
-      - dev_postgres_data_backups:/backups:z
+      - parcial2ati2_postgres_data:/var/lib/postgresql/data:Z
+      - parcial2ati2_postgres_data_backups:/backups:z
     env_file:
       - ../../envs/dev/postgres
     ports:

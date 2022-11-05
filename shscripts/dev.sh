@@ -43,6 +43,11 @@ create-app(){
     dockerpy rm -r "$APP_DIR" )
 }
 
+resetdb(){
+  docker-compose stop django && \
+  dockerpy python shscripts/reset_db.py
+}
+
 # Docker related
 alias runserver='docker-compose run --rm --service-ports django'
 alias logs='docker-compose logs --no-log-prefix -f django'

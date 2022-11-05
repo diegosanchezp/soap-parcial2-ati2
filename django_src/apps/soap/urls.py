@@ -1,5 +1,5 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-    path("task/", views.task_service),
+    path("countries/", views.country_service),
 ]

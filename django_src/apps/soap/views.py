@@ -3,55 +3,61 @@ from django.views.decorators.csrf import csrf_exempt
 from spyne.server.django import DjangoApplication
 from spyne.util.django import DjangoComplexModel
 
-from spyne.model.primitive import Integer, Unicode
+from spyne.model.primitive import UnsignedInteger, Unicode
 from spyne.protocol.soap import Soap11
 from spyne.application import Application
 from spyne.service import Service
 from spyne.decorator import rpc
 from spyne.error import ResourceNotFoundError
-from .models import Task
+from .models import Country, State, City
 from spyne.model.complex import ComplexModel, Array
 
 # Create your services here.
-class TaskType(DjangoComplexModel):
+class CountryType(DjangoComplexModel):
     class Attributes(DjangoComplexModel.Attributes):
-        django_model = Task
+        django_model = Country
 
-class TaskAndTasks(ComplexModel):
-    task = TaskType
-    tasks = Array(TaskType)
+class StateType(DjangoComplexModel):
+    class Attributes(DjangoComplexModel.Attributes):
+        django_model = State
 
-class TaskService(Service):
+class CityType(DjangoComplexModel):
+    class Attributes(DjangoComplexModel.Attributes):
+        django_model = City
+
+class CountryService(Service):
     """
-    Servicio para obtener tareas
+    Servicio para obtener paises, estado y ciudades
     """
-    @rpc(Integer, _returns=TaskAndTasks)
-    def get_task(ctx, pk):
-        """
-        Obtener una tarea especifica y el resto
-        """
-        try:
-            return TaskAndTasks(
-                task=Task.objects.get(pk=pk),
-                tasks=Task.objects.exclude(pk=pk)
-            )
-        except Task.DoesNotExist:
-            # Mandar una excepcion al cliente si no se encuentra
-            # la tarea
-            raise ResourceNotFoundError('Tarea')
 
-    @rpc(_returns=Array(TaskType))
-    def get_tasks(ctx):
+    @rpc(_returns=Array(CountryType))
+    def get_countries(ctx):
         """
-        Obtener el todas las tareas
+        Get a list of countries
         """
-        return Task.objects.all()
+
+        return Country.objects.all()
+
+    @rpc(UnsignedInteger, _returns=Array(StateType))
+    def get_states(ctx, country_id):
+        """
+        Get the states of a country
+        """
+        return State.objects.filter(country=country_id)
 
 
-app = Application([TaskService],
+    @rpc(UnsignedInteger, _returns=Array(CityType))
+    def get_cities(ctx, state_id):
+        """
+        Get the cities of a state
+        """
+        return City.objects.filter(state=state_id)
+
+
+app = Application([CountryService],
     'django_src.apps.soap',
     in_protocol=Soap11(validator='lxml'),
     out_protocol=Soap11(),
 )
 
-task_service = csrf_exempt(DjangoApplication(app))
+country_service = csrf_exempt(DjangoApplication(app))
